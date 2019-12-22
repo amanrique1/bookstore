@@ -1,0 +1,43 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-4">
+            <br>
+            <div class="row justify-content-center align-self-center" *ngxPermissionsOnly="['ADMIN']">
+                <button [ngClass]="{ 'btn-primary': !showCreate, 'btn-danger': showCreate }" type="button" class="btn"
+                    (click)="showHideCreate()">Create an author</button>
+            </div>
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th class="h4">Author´s Name</th>    
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let author of authors" >
+                        <td style="cursor: pointer;" (click)="onSelected(author.id)"> <dd>{{author.name}}</dd>
+                </td>
+                <td *ngxPermissionsOnly="['ADMIN']">
+                    <button class="btn btn-primary" (click)="showHideEdit(author.id)"><span class="fa fa-pencil"></span></button>
+                </td>
+                <td *ngxPermissionsOnly="['ADMIN']">
+                    <button class="btn btn-danger" (click)="deleteAuthor(author.id)"><span class="fa fa-trash"></span></button>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-8">
+            <div *ngIf="showView">
+                <app-author-detail [authorDetail]="selectedAuthor"></app-author-detail>
+            </div>
+            <div *ngIf="showCreate">
+                <app-author-create (cancel)="showHideCreate()" (create)="ngOnInit()"></app-author-create>
+            </div>
+            <div *ngIf="showEdit">
+                <app-author-edit [author]="selectedAuthor" (cancel)="showHideEdit(selectedAuthor.id)" (update)="updateAuthor()" ></app-author-edit>
+            </div>
+        </div>   
+    </div>
+</div>

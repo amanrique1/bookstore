@@ -1,0 +1,42 @@
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-4">
+            <br>
+            <div class="row justify-content-center align-self-center" *ngxPermissionsOnly="['ADMIN']">
+                <button [ngClass]="{ 'btn-primary': !showCreate, 'btn-danger': showCreate }" type="button" class="btn"
+                    (click)="showHideCreate()">Create an editorial</button>
+            </div>
+            <br>
+            <br>
+            <table class="table table-striped">
+                <thead>
+                    <tr>
+                        <th>Name</th>    
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor = "let editorial of editorials">
+                        <td style="cursor: pointer;">
+                <dd class="figure-caption" routerLink="/editorials/{{editorial.id}}">{{editorial.name}}</dd>
+                </td>
+                <td *ngxPermissionsOnly="['ADMIN']">
+                    <button class="btn btn-primary" (click)="showHideEdit(editorial.id)"><span class="fa fa-pencil"></span></button>
+                </td>
+                <td *ngxPermissionsOnly="['ADMIN']">
+                    <button class="btn btn-danger" (click)="deleteEditorial(editorial.id)"><span class="fa fa-trash"></span></button>
+                </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-8">
+            <div *ngIf="showCreate">
+                <app-editorial-create (cancel)="showHideCreate()" (create)="ngOnInit()" *ngIf="showCreate"></app-editorial-create>
+            </div>
+            <div *ngIf="showEdit">
+                <app-editorial-edit [editorial_id]="editorial_edit_id" (cancel)="showHideEdit(editorial_edit_id)" (update)="updateEditorial()"></app-editorial-edit>
+            </div>
+        </div>
+
+    </div>
+</div>

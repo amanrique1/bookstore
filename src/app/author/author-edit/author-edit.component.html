@@ -1,0 +1,57 @@
+<div class="row">
+    <div class="col-12">
+        <br>
+        <h2 class="text-center">Edit an author</h2>
+        <br>
+        <form name="author" (ngSubmit)="f.form.valid && editAuthor()" #f="ngForm" novalidate>
+              <div class="form-group">
+                <label for="authorName"><b>Name</b></label>
+                <input type="text" name="authorName" class="form-control" id="authorName" [(ngModel)]="author.name"
+                       #authorName="ngModel" [ngClass]="{ 'is-invalid': f.submitted && authorName.invalid }" required>
+                       <div class="invalid-feedback">
+                    <div>The author's name is missing</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="authorBirthDate"><b>Birth date</b></label>
+                <div [ngClass]="{ 'is-invalid': f.submitted && authorBirthDate.invalid }">
+                    <input class="form-control" id="authorBirthDate" name="authorBirthDate" dateFormat="YYYY-MM-dd"
+                       [(ngModel)]="author.birthDate" ngbDatepicker #d="ngbDatepicker" (click)="d.toggle()"
+                       #authorBirthDate="ngModel" [ngClass]="{'is-invalid': f.submitted && authorBirthDate.invalid }"
+                       required>
+                       <div class="invalid-feedback">
+                        <div>The author's birth date is missing</div>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="authorDescription"><b>Description</b></label>
+                <textarea name="authorDescription" class="form-control" id="authorDescription" [(ngModel)]="author.description"
+                          #authorDescription="ngModel" [ngClass]="{ 'is-invalid': f.submitted && authorDescription.invalid }"
+                          required></textarea>
+                <div class="invalid-feedback">
+                    <div>The author's description is missing</div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="authorImage"><b>Image</b></label>
+                <input type="text" name="authorImage" class="form-control" id="authorImage" [(ngModel)]="author.image"
+                       #authorImage="ngModel" [ngClass]="{ 'is-invalid': f.submitted && authorImage.invalid }" required>
+                       <div class="invalid-feedback">
+                    <div>The author's image is missing</div>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="row form-inline justify-content-center align-self-center">
+            <i  style="padding-right: 1em;"class="fa fa-save " (click)="editAuthor()"></i>
+          
+            <i class="fa fa-ban" (click)="cancelEdition()"></i>
+        </div>
+    </div>
+</div>
+<br>
+<br>

@@ -1,0 +1,10 @@
+<div class="col-md-12">
+    <div class="container-fluid">   
+        <p class="h4 p-3">Editorial: {{editorialDetail.name}}</p>
+        <br>
+        <div class="row border margin">
+            <p class="h4 p-3">Available books: </p>
+            <app-book-list [books]="editorialDetail.books"></app-book-list>
+        </div>
+    </div>
+</div>
